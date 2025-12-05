@@ -1,0 +1,21 @@
+{
+  "name": "@iconforge/core",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "svgo": "^3.3.0",
+    "fast-glob": "^3.3.0",
+    "zod": "^3.22.0",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0"
+  }
+}
