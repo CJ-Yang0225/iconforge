@@ -1,0 +1,25 @@
+{
+  "name": "@iconforge/cli",
+  "version": "0.1.0",
+  "bin": {
+    "iconforge": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs --dts",
+    "dev": "tsup src/index.ts --format cjs --dts --watch",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@iconforge/core": "workspace:*",
+    "@types/fs-extra": "^11.0.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.0",
+    "jiti": "^2.6.1",
+    "ora": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.0"
+  }
+}
