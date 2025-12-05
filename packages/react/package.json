@@ -1,9 +1,25 @@
 {
   "name": "@iconforge/react",
   "version": "0.1.0",
+  "description": "React runtime utilities for IconForge",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CJ-Yang0225/iconforge.git",
+    "directory": "packages/react"
+  },
+  "keywords": [
+    "react",
+    "icon",
+    "svg"
+  ],
+  "author": "CJ Yang",
+  "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"

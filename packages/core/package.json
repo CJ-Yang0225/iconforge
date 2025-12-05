@@ -1,9 +1,27 @@
 {
   "name": "@iconforge/core",
   "version": "0.1.0",
+  "description": "Core library for IconForge - SVG icon processing with optimization and type safety",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CJ-Yang0225/iconforge.git",
+    "directory": "packages/core"
+  },
+  "keywords": [
+    "svg",
+    "icon",
+    "optimization",
+    "svgo",
+    "typescript"
+  ],
+  "author": "CJ Yang",
+  "license": "MIT",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
