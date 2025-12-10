@@ -1,8 +1,11 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
 import { initCommand } from "./commands/init";
 import { version } from "../package.json";
 import { buildCommand } from "./commands/build";
 import { validateCommand } from "./commands/validate";
+import { statsCommand } from "./commands/stats";
 
 const program = new Command();
 
@@ -19,5 +22,10 @@ program
   .command("validate")
   .description("Validate icons")
   .action(validateCommand);
+
+program
+  .command("stats")
+  .description("Show icon statistics")
+  .action(statsCommand);
 
 program.parse(process.argv);
