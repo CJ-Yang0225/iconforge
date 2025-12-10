@@ -1,6 +1,6 @@
 {
   "name": "@iconforge/react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React runtime utilities for IconForge",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -20,6 +20,13 @@
   ],
   "author": "CJ Yang",
   "license": "MIT",
+  "homepage": "https://github.com/CJ-Yang0225/iconforge#readme",
+  "bugs": {
+    "url": "https://github.com/CJ-Yang0225/iconforge/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"

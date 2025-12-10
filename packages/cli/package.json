@@ -1,6 +1,6 @@
 {
   "name": "@iconforge/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI tool for IconForge - Generate type-safe React icon components from SVG files",
   "bin": {
     "iconforge": "./dist/index.js"
@@ -23,6 +23,13 @@
   ],
   "author": "CJ Yang",
   "license": "MIT",
+  "homepage": "https://github.com/CJ-Yang0225/iconforge#readme",
+  "bugs": {
+    "url": "https://github.com/CJ-Yang0225/iconforge/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format cjs --dts",
     "dev": "tsup src/index.ts --format cjs --dts --watch",
