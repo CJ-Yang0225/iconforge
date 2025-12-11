@@ -29,7 +29,10 @@ export const IconForgeConfigSchema = z.object({
     .default({}),
 });
 
-export type IconForgeConfig = z.infer<typeof IconForgeConfigSchema>;
+// Export the input type (allows optional fields with defaults)
+export type IconForgeConfigInput = z.input<typeof IconForgeConfigSchema>;
+// Export the output type (fully resolved)
+export type IconForgeConfig = z.output<typeof IconForgeConfigSchema>;
 
 export const defaultConfig: IconForgeConfig = {
   srcDirs: ["src/assets/icons"],
@@ -47,6 +50,8 @@ export const defaultConfig: IconForgeConfig = {
   },
 };
 
-export function defineConfig(config: IconForgeConfig): IconForgeConfig {
+export function defineConfig(
+  config: IconForgeConfigInput
+): IconForgeConfigInput {
   return config;
 }
