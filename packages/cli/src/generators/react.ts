@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 import { ProcessedIcon } from "@iconforge/core";
+import { convertSvgToJsx } from "../utils/jsx-transformer";
 
 export async function generateReact(icons: ProcessedIcon[], outputDir: string) {
   const reactDir = path.join(outputDir, "react");
@@ -23,11 +24,16 @@ ${iconNames.map((name) => `  '${name}',`).join("\n")}
 export const SvgSymbols = () => (
   <svg style={{ display: 'none' }} xmlns="http://www.w3.org/2000/svg">
 ${icons
-  .map(
-    (icon) => `    <symbol id="${icon.name}" viewBox="${icon.viewBox}">
-      ${icon.optimizedContent.replace(/<svg[^>]*>|<\/svg>/g, "").trim()}
-    </symbol>`
-  )
+  .map((icon) => {
+    // 提取 SVG 內部內容並轉換為 JSX 格式
+    const innerContent = icon.optimizedContent
+      .replace(/<svg[^>]*>|<\/svg>/g, "")
+      .trim();
+    const jsxContent = convertSvgToJsx(innerContent);
+    return `    <symbol id="${icon.name}" viewBox="${icon.viewBox}">
+      ${jsxContent}
+    </symbol>`;
+  })
   .join("\n")}
   </svg>
 );
