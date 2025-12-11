@@ -1,6 +1,6 @@
 {
   "name": "@iconforge/cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "CLI tool for IconForge - Generate type-safe React icon components from SVG files",
   "bin": {
     "iconforge": "./dist/index.js"
