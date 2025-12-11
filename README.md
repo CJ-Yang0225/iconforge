@@ -30,7 +30,27 @@
 
 ## 🚀 快速開始
 
-### 1. 安裝
+IconForge CLI 支援兩種使用方式：
+
+### 方式一：不安裝依賴（輕量使用）
+
+直接透過 `npx` 執行，不需要安裝任何依賴：
+
+```bash
+# 初始化專案
+npx @iconforge/cli init
+
+# 生成元件
+npx @iconforge/cli build
+```
+
+> 適合快速試用或不需要內建類型提示的情境。
+
+---
+
+### 方式二：安裝為開發依賴（推薦）
+
+安裝後可獲得完整的類型提示和更快的執行速度：
 
 ```bash
 # 使用 pnpm（推薦）
@@ -40,10 +60,44 @@ pnpm add -D @iconforge/cli @iconforge/react
 npm install -D @iconforge/cli @iconforge/react
 ```
 
-### 2. 初始化專案
+安裝後有多種執行方式：
 
 ```bash
-npx iconforge init
+# 使用 pnpm exec
+pnpm exec iconforge init
+pnpm exec iconforge build
+
+# 或使用 npx（會優先使用本地安裝的版本）
+npx iconforge build
+```
+
+**建議：加入 `package.json` scripts**
+
+```json
+{
+  "scripts": {
+    "icons": "iconforge build",
+    "icons:check": "iconforge validate",
+    "icons:stats": "iconforge stats"
+  }
+}
+```
+
+之後只需執行：
+
+```bash
+pnpm icons        # 生成元件
+pnpm icons:check  # 檢查圖示
+pnpm icons:stats  # 查看統計
+```
+
+---
+
+### 初始化專案
+
+```bash
+npx @iconforge/cli init
+# 或已安裝：pnpm exec iconforge init
 ```
 
 這將會：
@@ -51,17 +105,18 @@ npx iconforge init
 - 建立 `src/assets/icons` 目錄
 - 更新 `.gitignore`
 
-### 3. 加入 SVG 圖示
+### 加入 SVG 圖示
 
 將 SVG 圖示放入 `src/assets/icons/` 目錄。
 
-### 4. 生成元件
+### 生成元件
 
 ```bash
-npx iconforge build
+npx @iconforge/cli build
+# 或已安裝：pnpm exec iconforge build
 ```
 
-### 5. 在 React/Next.js 中使用
+### 在 React/Next.js 中使用
 
 **在根 Layout 注入 Symbols：**
 

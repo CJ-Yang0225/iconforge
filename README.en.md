@@ -30,7 +30,27 @@ This project uses a monorepo architecture with the following packages:
 
 ## 🚀 Quick Start
 
-### 1. Installation
+IconForge CLI supports two ways to use:
+
+### Option 1: Without Installing Dependencies (Lightweight)
+
+Run directly via `npx` without installing any dependencies:
+
+```bash
+# Initialize project
+npx @iconforge/cli init
+
+# Generate components
+npx @iconforge/cli build
+```
+
+> Suitable for quick trials or when you don't need built-in type hints.
+
+---
+
+### Option 2: Install as Dev Dependency (Recommended)
+
+Install for full type hints and faster execution:
 
 ```bash
 # Using pnpm (recommended)
@@ -40,10 +60,44 @@ pnpm add -D @iconforge/cli @iconforge/react
 npm install -D @iconforge/cli @iconforge/react
 ```
 
-### 2. Initialize Project
+After installation, you have multiple ways to run:
 
 ```bash
-npx iconforge init
+# Using pnpm exec
+pnpm exec iconforge init
+pnpm exec iconforge build
+
+# Or using npx (will use locally installed version first)
+npx iconforge build
+```
+
+**Recommended: Add to `package.json` scripts**
+
+```json
+{
+  "scripts": {
+    "icons": "iconforge build",
+    "icons:check": "iconforge validate",
+    "icons:stats": "iconforge stats"
+  }
+}
+```
+
+Then just run:
+
+```bash
+pnpm icons        # Generate components
+pnpm icons:check  # Check icons
+pnpm icons:stats  # View statistics
+```
+
+---
+
+### Initialize Project
+
+```bash
+npx @iconforge/cli init
+# Or if installed: pnpm exec iconforge init
 ```
 
 This will:
@@ -51,17 +105,18 @@ This will:
 - Create `src/assets/icons` directory
 - Update `.gitignore`
 
-### 3. Add SVG Icons
+### Add SVG Icons
 
 Place your SVG icons in the `src/assets/icons/` directory.
 
-### 4. Generate Components
+### Generate Components
 
 ```bash
-npx iconforge build
+npx @iconforge/cli build
+# Or if installed: pnpm exec iconforge build
 ```
 
-### 5. Use in React/Next.js
+### Use in React/Next.js
 
 **Add SvgSymbols to your root layout:**
 
