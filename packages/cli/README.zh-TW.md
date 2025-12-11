@@ -2,13 +2,13 @@
 
 > [English Version](./README.md)
 
-IconForge 的命令列工具 — 一個指令就能從 SVG 檔案生成型別安全的 React 圖標元件。
+IconForge 的命令列工具 — 一個指令就能從 SVG 檔案生成型別安全的 React 圖示元件。
 
 ## 什麼是 IconForge？
 
-**IconForge** 是現代化的跨框架 SVG 圖標管理工具，支援 React、Vue、Web Components 等主流前端框架。它自動化處理 SVG 圖標整合的繁瑣工作：
+**IconForge** 是現代化的跨框架 SVG 圖示管理工具，支援 React、Vue、Web Components 等主流前端框架。它自動化處理 SVG 圖示整合的繁瑣工作：
 
-- **掃描** 你的 SVG 圖標目錄
+- **掃描** 你的 SVG 圖示目錄
 - **優化** 使用 SVGO 壓縮 SVG
 - **生成** 型別安全的元件，提供完整的 IntelliSense 支援
 - **輸出** SSR 友善的 SVG Sprite 系統（無 FOUC 問題！）
@@ -24,7 +24,7 @@ pnpm add -D @iconforge/cli @iconforge/react
 # 2. 初始化設定
 npx iconforge init
 
-# 3. 將 SVG 圖標放入 src/assets/icons/
+# 3. 將 SVG 圖示放入 src/assets/icons/
 
 # 4. 生成元件
 npx iconforge build
@@ -39,8 +39,8 @@ npx iconforge build
 | 🎨 **顏色處理**  | 智能 `currentColor` 替換，支援主題切換            |
 | 📦 **SVGO 整合** | 內建 SVG 優化功能                                 |
 | 🚀 **SSR 友善**  | 內嵌 SVG Symbols 避免未樣式化內容閃爍             |
-| 🔍 **驗證功能**  | 在建置前檢測重複名稱和空圖標                      |
-| 📊 **統計資訊**  | 分析圖標數量、大小和優化結果                      |
+| 🔍 **驗證功能**  | 在建置前檢測重複名稱和空圖示                      |
+| 📊 **統計資訊**  | 分析圖示數量、大小和優化結果                      |
 
 ## 安裝
 
@@ -66,7 +66,7 @@ yarn add -D @iconforge/cli
 在專案中初始化 IconForge，這會建立：
 
 - `iconforge.config.ts` — 設定檔
-- `src/assets/icons/` — 預設的圖標來源目錄
+- `src/assets/icons/` — 預設的圖示來源目錄
 - 更新 `.gitignore` 以排除生成的檔案
 
 ```bash
@@ -88,7 +88,7 @@ npx iconforge build
 | 檔案             | 用途                                  |
 | ---------------- | ------------------------------------- |
 | `types.ts`       | `IconName` 聯合型別，提供型別安全     |
-| `SvgSymbols.tsx` | 包含所有圖標定義的 SVG Sprite         |
+| `SvgSymbols.tsx` | 包含所有圖示定義的 SVG Sprite         |
 | `Icon.tsx`       | 帶有 `name`、`size` 屬性的 React 元件 |
 | `index.ts`       | 統一匯出檔                            |
 
@@ -96,31 +96,31 @@ npx iconforge build
 
 #### `iconforge validate`
 
-在建置前檢查圖標是否有常見問題。
+在建置前檢查圖示是否有常見問題。
 
 ```bash
 npx iconforge validate
 ```
 
 **檢查項目：**
-- 跨目錄的重複圖標名稱
+- 跨目錄的重複圖示名稱
 - 空的或格式錯誤的 SVG 內容
 
 ---
 
 #### `iconforge stats`
 
-顯示圖標統計資訊和優化指標。
+顯示圖示統計資訊和優化指標。
 
 ```bash
 npx iconforge stats
 ```
 
 **顯示內容：**
-- 圖標總數
+- 圖示總數
 - 合併檔案大小（優化前/後）
-- 最小和最大的圖標
-- 完整圖標列表及個別大小
+- 最小和最大的圖示
+- 完整圖示列表及個別大小
 
 ## 設定
 
@@ -294,14 +294,14 @@ IconForge 對 React/Next.js 使用**內嵌 SVG Sprite** 方式：
 | --------------- | ------------------------------------------- |
 | **無 FOUC**     | Symbols 在初始 HTML 中，沒有載入延遲        |
 | **SSR 兼容**    | 適用於伺服器端渲染，無 hydration 不匹配問題 |
-| **單一 Bundle** | 所有圖標在一個元件中，有利於 tree-shaking   |
+| **單一 Bundle** | 所有圖示在一個元件中，有利於 tree-shaking   |
 | **CSS 樣式**    | 使用 `currentColor` 實現動態主題            |
 
 ### Bundle 大小考量
 
 - SVGO 優化通常可將 SVG 大小減少 30-60%
-- 對於超過 100 個圖標的專案，考慮延遲載入或外部 Sprite（未來功能）
-- 使用 `iconforge stats` 監控你的圖標 bundle 大小
+- 對於超過 100 個圖示的專案，考慮延遲載入或外部 Sprite（未來功能）
+- 使用 `iconforge stats` 監控你的圖示 bundle 大小
 
 ## 常見問題
 
@@ -309,11 +309,11 @@ IconForge 對 React/Next.js 使用**內嵌 SVG Sprite** 方式：
 
 確保 `<SvgSymbols />` 在 DOM 樹中**先於**任何 `<Icon />` 元件渲染。將它放在根 layout 的頂部。
 
-### 如何新增圖標？
+### 如何新增圖示？
 
 1. 將 `.svg` 檔案放入來源目錄
 2. 執行 `npx iconforge build`
-3. 新的圖標名稱將具有完整的型別安全支援
+3. 新的圖示名稱將具有完整的型別安全支援
 
 ### 可以使用自訂 SVGO 插件嗎？
 
