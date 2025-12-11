@@ -1,25 +1,32 @@
 # IconForge
 
-> 🚧 **Work In Progress** - 目前處於開發階段，API 可能會有變動
+> [English](./README.en.md)
 
-現代化的 SVG 圖標管理工具，專為 React/Next.js 設計，提供完整的型別安全與自動化工作流程。
+🚧 **Work In Progress** - 目前處於開發階段，API 可能會有變動
+
+現代化的 SVG 圖示管理工具，支援 React、Vue、Web Components 等主流前端框架，提供完整的型別安全與自動化工作流程。
 
 ## ✨ 特色功能
 
-- 🎯 **型別安全**：自動生成 TypeScript 型別定義，享受完整的 IDE 自動補全
-- ⚡ **自動化**：掃描、優化、生成一鍵完成
-- 🎨 **顏色控制**：智能處理 `currentColor`，輕鬆實現主題切換
-- 🔧 **高度可配置**：靈活的配置選項，適應各種使用場景
-- 📦 **Monorepo 架構**：清晰的模組化設計
-- 🚀 **SSR 友善**：支援 Next.js 等 SSR 框架，無 FOUC 問題
+| 功能            | 說明                                              |
+| --------------- | ------------------------------------------------- |
+| 🎯 **型別安全**  | 自動生成 TypeScript 型別，享受完整的 IDE 自動補全 |
+| ⚡ **零配置**    | 合理的預設值，開箱即用                            |
+| 🎨 **顏色處理**  | 智能 `currentColor` 替換，支援主題切換            |
+| 📦 **SVGO 整合** | 內建 SVG 優化功能                                 |
+| 🚀 **SSR 友善**  | 內嵌 SVG Symbols 避免 FOUC（未樣式化內容閃爍）    |
+| 🔍 **驗證功能**  | 在建置前檢測重複名稱和空圖示                      |
+| 📊 **統計資訊**  | 分析圖示數量、大小和優化結果                      |
 
 ## 📦 套件說明
 
 此專案採用 Monorepo 架構，包含以下套件：
 
-- **[@iconforge/core](./packages/core)** - 核心處理邏輯（SVG 載入、優化、處理）
-- **[@iconforge/cli](./packages/cli)** - 命令列工具
-- **[@iconforge/react](./packages/react)** - React 執行環境輔助套件
+| 套件                                 | 說明                       |
+| ------------------------------------ | -------------------------- |
+| [@iconforge/core](./packages/core)   | 核心處理邏輯（載入、優化） |
+| [@iconforge/cli](./packages/cli)     | 命令列工具                 |
+| [@iconforge/react](./packages/react) | React 執行環境輔助套件     |
 
 ## 🚀 快速開始
 
@@ -35,29 +42,36 @@ npm install -D @iconforge/cli @iconforge/react
 
 ### 2. 初始化專案
 
-在專案根目錄執行初始化指令：
-
 ```bash
 npx iconforge init
 ```
 
 這將會：
 - 建立 `iconforge.config.ts` 設定檔
-- 建立 `src/assets/icons` 目錄 (範例圖標位置)
+- 建立 `src/assets/icons` 目錄
 - 更新 `.gitignore`
 
-### 3. 在 React/Next.js 中設定
+### 3. 加入 SVG 圖示
 
-**Step 1: 在根 Layout 注入 Symbols**
+將 SVG 圖示放入 `src/assets/icons/` 目錄。
 
-編輯 `src/app/layout.tsx` (Next.js App Router) 或 `src/main.tsx` (Vite)：
+### 4. 生成元件
+
+```bash
+npx iconforge build
+```
+
+### 5. 在 React/Next.js 中使用
+
+**在根 Layout 注入 Symbols：**
 
 ```tsx
-import { SvgSymbols } from '@/generated/icons/react'; // 根據 output 設定調整路徑
+// app/layout.tsx (Next.js App Router)
+import { SvgSymbols } from '@/generated/icons/react';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html>
       <body>
         <SvgSymbols />
         {children}
@@ -67,30 +81,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-**Step 2: 使用 Icon 元件**
+**使用 Icon 元件：**
 
 ```tsx
 import { Icon } from '@/generated/icons/react';
 
-export function Header() {
+export function Navigation() {
   return (
-    <header>
-      {/* Name 屬性會有自動補全 (IntelliSense) */}
-      <Icon name="menu" size={24} />
-      <Icon name="account" className="text-blue-500 hover:text-blue-700" />
-    </header>
+    <nav>
+      {/* name 屬性會有自動補全 */}
+      <Icon name="home" size={24} />
+      <Icon name="settings" className="text-gray-500" />
+    </nav>
   );
 }
-```
-
-### 4. 建置與開發
-
-```bash
-# 生成圖標 (通常加在 package.json scripts 中)
-npx iconforge build
-
-# 查看統計資訊
-npx iconforge stats
 ```
 
 ## ⚙️ 設定選項
@@ -98,36 +102,56 @@ npx iconforge stats
 `iconforge.config.ts` 範例：
 
 ```typescript
-import { defineConfig } from '@iconforge/core';
+import { defineConfig } from '@iconforge/cli';
 
 export default defineConfig({
-  // SVG 來源目錄
-  srcDirs: ['./src/assets/icons'],
-
-  // 輸出設定
+  srcDirs: ['src/assets/icons'],
   output: {
-    dir: './src/generated/icons',
+    dir: 'src/generated/icons',
     formats: {
-      react: true, // 生成 React 元件
-      typescript: true, // 生成 TypeScript 定義
+      svg: true,
+      typescript: true,
+      react: true,
     },
   },
-
-  // 顏色處理策略
   colorProcessing: {
-    // 'currentColor': 將 fill/stroke 換成 currentColor
-    // 'strip': 移除所有 fill/stroke 屬性
-    strategy: 'currentColor', 
+    strategy: 'currentColor',
+    preserveColors: [],
   },
-  
-  // SVGO 設定 (會與預設值合併)
-  svgo: {
-    plugins: [
-      // 可在此加入額外的 SVGO plugins
-    ]
-  }
 });
 ```
+
+### 設定選項一覽
+
+| 選項                             | 型別                                      | 預設值                  | 說明                  |
+| -------------------------------- | ----------------------------------------- | ----------------------- | --------------------- |
+| `srcDirs`                        | `string[]`                                | `['src/assets/icons']`  | 掃描 SVG 檔案的目錄   |
+| `output.dir`                     | `string`                                  | `'src/generated/icons'` | 生成檔案的輸出目錄    |
+| `output.formats.svg`             | `boolean`                                 | `true`                  | 輸出優化後的 SVG 檔案 |
+| `output.formats.typescript`      | `boolean`                                 | `true`                  | 生成 TypeScript 定義  |
+| `output.formats.react`           | `boolean`                                 | `true`                  | 生成 React 元件       |
+| `colorProcessing.strategy`       | `'currentColor' \| 'strip' \| 'preserve'` | `'currentColor'`        | 顏色處理策略          |
+| `colorProcessing.preserveColors` | `string[]`                                | `[]`                    | 要保留的顏色          |
+| `svgo.plugins`                   | `Plugin[]`                                | `[]`                    | 額外的 SVGO 插件      |
+
+### 顏色處理策略
+
+| 策略           | 行為                                                       |
+| -------------- | ---------------------------------------------------------- |
+| `currentColor` | 將 `fill`/`stroke` 替換為 `currentColor`（繼承 CSS color） |
+| `strip`        | 移除所有 `fill`/`stroke` 屬性                              |
+| `preserve`     | 保留原始顏色不變                                           |
+
+## 📋 CLI 指令
+
+| 指令                 | 說明            |
+| -------------------- | --------------- |
+| `iconforge init`     | 初始化專案設定  |
+| `iconforge build`    | 生成 React 元件 |
+| `iconforge validate` | 檢查圖示問題    |
+| `iconforge stats`    | 顯示圖示統計    |
+
+詳細使用說明請參閱 [@iconforge/cli README](./packages/cli/README.zh-TW.md)。
 
 ## 🛠️ 開發與貢獻
 
@@ -142,9 +166,9 @@ pnpm build
 pnpm test
 ```
 
-## 📋 需求
+## 📋 系統需求
 
-- Node.js >= 24.10.0
+- Node.js >= 18
 - pnpm >= 10.24.0
 
 ## 📄 License
