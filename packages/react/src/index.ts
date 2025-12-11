@@ -19,7 +19,7 @@ export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
  * SvgSymbols 元件的 Props 介面
  */
 export interface SvgSymbolsProps {
-  /** 可選：只載入指定的圖標 */
+  /** 可選：只載入指定的圖示 */
   icons?: string[];
   /** 載入完成時的回調 */
   onLoad?: () => void;
