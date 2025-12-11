@@ -7,6 +7,12 @@ import { buildCommand } from "./commands/build";
 import { validateCommand } from "./commands/validate";
 import { statsCommand } from "./commands/stats";
 
+export {
+  defineConfig,
+  type IconForgeConfig,
+  type IconForgeConfigInput,
+} from "@iconforge/core";
+
 const program = new Command();
 
 program.name("iconforge").description("IconForge CLI tool").version(version);

@@ -129,7 +129,7 @@ npx iconforge stats
 執行 `iconforge init` 後，你會得到一個 `iconforge.config.ts` 檔案：
 
 ```typescript
-import { defineConfig } from '@iconforge/core';
+import { defineConfig } from '@iconforge/cli';
 
 export default defineConfig({
   srcDirs: ['src/assets/icons'],

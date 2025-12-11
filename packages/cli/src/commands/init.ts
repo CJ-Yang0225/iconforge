@@ -25,23 +25,27 @@ export async function initCommand() {
 
   try {
     // 1. Create iconforge.config.ts
-    const configContent = `import { defineConfig } from '@iconforge/core';
+    const configContent = `
+      import { defineConfig } from '@iconforge/cli';
 
-export default defineConfig({
-  srcDirs: ['src/assets/icons'],
-  output: {
-    dir: 'src/components/icons',
-    formats: {
-      svg: true,
-      typescript: true,
-      react: true,
-    },
-  },
-});
-`;
+      export default defineConfig({
+        srcDirs: ['src/assets/icons'],
+        output: {
+          dir: 'src/components/icons',
+          formats: {
+            svg: true,
+            typescript: true,
+            react: true,
+          },
+        },
+      });
+    `
+      .replace(/^\s{6}/gm, "")
+      .trim();
+
     await fs.writeFile(
       path.join(process.cwd(), "iconforge.config.ts"),
-      configContent,
+      configContent
     );
 
     // 2. Create src/assets/icons directory

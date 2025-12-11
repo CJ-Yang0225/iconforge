@@ -129,7 +129,7 @@ npx iconforge stats
 After running `iconforge init`, you'll have an `iconforge.config.ts` file:
 
 ```typescript
-import { defineConfig } from '@iconforge/core';
+import { defineConfig } from '@iconforge/cli';
 
 export default defineConfig({
   srcDirs: ['src/assets/icons'],
