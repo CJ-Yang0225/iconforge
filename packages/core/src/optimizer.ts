@@ -65,7 +65,6 @@ function buildPluginChain(config: IconForgeConfig): PluginConfig[] {
     // 參考：https://svgo.dev/docs/plugins/custom-plugins/
     if (preserveColors.length > 0) {
       // 目前僅記錄，不影響執行
-      // eslint-disable-next-line no-console
       console.debug(
         `[IconForge] preserveColors specified: ${preserveColors.join(", ")} - feature not yet implemented`
       );
