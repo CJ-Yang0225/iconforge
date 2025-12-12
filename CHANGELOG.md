@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2025-12-12
+
+### Fixed
+
+- **Core**: Prevent SVGO from removing default attributes (e.g., `fill="black"`) by adjusting `preset-default` options (`removeUnknownsAndDefaults: { defaultAttrs: false }`). This ensures that `fill="black"` is preserved and correctly converted to `currentColor`.
+
+### Changed
+
+- **React**: Bumped versions to 0.2.2 to ensure consistency across the monorepo.
+
+## [0.2.1] - 2025-12-12
+
+### Fixed
+
+- **Core**: Added `propagateSvgPresentationAttrs` plugin to correctly inherit `fill` and `stroke` attributes from the root `<svg>` element to its children before color conversion. This fixes issues where `fill="currentColor"` on the SVG tag was lost during symbol generation.
+
 ## [0.2.0] - 2025-12-10
 
 ### Added

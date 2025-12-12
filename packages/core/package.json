@@ -1,6 +1,6 @@
 {
   "name": "@iconforge/core",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Core library for IconForge - SVG icon processing with optimization and type safety",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
