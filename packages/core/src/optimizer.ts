@@ -20,7 +20,11 @@ export function optimizeIcon(content: string, config: IconForgeConfig): string {
 
 /**
  * 建構 SVGO plugin 鏈
- * 優先順序：preset-default -> 顏色處理 -> 使用者自訂 plugins
+ * 優先順序：
+ *   1. preset-default → 進階優化
+ *   2. 自訂 plugins (顏色處理前置作業)
+ *   3. 顏色處理（convertColors）
+ *   4. 使用者自訂 plugins
  */
 function buildPluginChain(config: IconForgeConfig): PluginConfig[] {
   const plugins: PluginConfig[] = [];
@@ -31,6 +35,12 @@ function buildPluginChain(config: IconForgeConfig): PluginConfig[] {
     params: {
       overrides: {
         removeViewBox: false, // 保留 viewBox 以確保縮放正常
+        // 禁用移除「預設值」屬性的優化
+        // SVG 中 fill 的預設值是 black，所以 fill="black" 會被 removeUnknownsAndDefaults 移除
+        // 我們要保留它，讓 convertColors 可以轉換成 currentColor
+        removeUnknownsAndDefaults: {
+          defaultAttrs: false, // 不要移除預設值屬性（如 fill="black"）
+        },
       },
     },
   });
@@ -51,7 +61,54 @@ function buildPluginChain(config: IconForgeConfig): PluginConfig[] {
   if (config.colorProcessing.strategy === "currentColor") {
     const preserveColors = config.colorProcessing.preserveColors || [];
 
-    // 使用 convertColors plugin 並設定 currentColor
+    // 2.1 自訂 Plugin：繼承 svg 層的 fill/stroke 到子元素
+    //     這解決了 <svg fill="black"><path.../></svg> 的問題
+    //     透過 defaultAttrs: false，preset-default 不會移除 svg 的 fill="black"
+    //     我們在這裡把 svg 的 fill/stroke 傳遞給子元素
+    plugins.push({
+      name: "propagateSvgPresentationAttrs",
+      fn: () => {
+        return {
+          element: {
+            enter: (node) => {
+              // 只處理 <svg> 元素
+              if (node.name === "svg" && node.attributes) {
+                const svgFill = node.attributes.fill;
+                const svgStroke = node.attributes.stroke;
+
+                if (!svgFill && !svgStroke) return;
+
+                // 遍歷所有子元素
+                if (node.children) {
+                  for (const child of node.children) {
+                    if (
+                      child.type === "element" &&
+                      child.name !== "defs" &&
+                      child.attributes
+                    ) {
+                      // 如果子元素沒有 fill，繼承父層的 fill
+                      if (svgFill && !child.attributes.fill) {
+                        child.attributes.fill = svgFill;
+                      }
+                      // 如果子元素沒有 stroke，繼承父層的 stroke
+                      if (svgStroke && !child.attributes.stroke) {
+                        child.attributes.stroke = svgStroke;
+                      }
+                    }
+                  }
+                }
+
+                // 移除 svg 層的 fill/stroke（已經繼承到子元素了）
+                if (svgFill) delete node.attributes.fill;
+                if (svgStroke) delete node.attributes.stroke;
+              }
+            },
+          },
+        };
+      },
+    });
+
+    // 2.2 使用 convertColors plugin 並設定 currentColor
     plugins.push({
       name: "convertColors",
       params: {
