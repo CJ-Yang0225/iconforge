@@ -2,14 +2,16 @@ import { z } from "zod";
 
 export const IconForgeConfigSchema = z.object({
   srcDirs: z.array(z.string()).default(["src/assets/icons"]),
+  prefix: z.string().default("iconforge"), // For future VSCode extension icon pattern
   output: z
     .object({
-      dir: z.string().default("src/generated/icons"),
+      dir: z.string().default("src/components/icons"),
       formats: z
         .object({
           svg: z.boolean().default(true),
           typescript: z.boolean().default(true),
           react: z.boolean().default(true),
+          vue: z.boolean().default(false),
         })
         .default({}),
     })
@@ -36,12 +38,14 @@ export type IconForgeConfig = z.output<typeof IconForgeConfigSchema>;
 
 export const defaultConfig: IconForgeConfig = {
   srcDirs: ["src/assets/icons"],
+  prefix: "iconforge",
   output: {
-    dir: "src/generated/icons",
+    dir: "src/components/icons",
     formats: {
       svg: true,
       typescript: true,
       react: true,
+      vue: false,
     },
   },
   colorProcessing: {

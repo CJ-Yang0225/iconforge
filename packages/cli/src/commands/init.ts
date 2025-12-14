@@ -30,12 +30,14 @@ export async function initCommand() {
 
       export default defineConfig({
         srcDirs: ['src/assets/icons'],
+        prefix: 'iconforge', // For future VSCode extension icon preview
         output: {
           dir: 'src/components/icons',
           formats: {
             svg: true,
             typescript: true,
             react: true,
+            vue: false, // Set to true for Vue/Nuxt projects
           },
         },
       });
