@@ -1,6 +1,6 @@
 {
   "name": "@iconforge/core",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Core library for IconForge - SVG icon processing with optimization and type safety",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -32,7 +32,8 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "svgo": "^3.3.0",
