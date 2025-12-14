@@ -1,10 +1,10 @@
 // Types
-export type { IconName } from "./types";
-export { iconNames } from "./types";
+export type { IconName } from './types';
+export { iconNames } from './types';
 
 // Components
-export { default as Icon } from "./Icon.vue";
-export { default as SvgSymbols } from "./SvgSymbols.vue";
+export { default as Icon } from './Icon.vue';
+export { default as SvgSymbols } from './SvgSymbols.vue';
 
 // Composables
 export {
@@ -14,7 +14,7 @@ export {
   iconRegistry,
   type IconMetadata,
   type IconRegistry,
-} from "./useIcon";
+} from './useIcon';
 
 // Re-export component props types
-export type { IconProps } from "./Icon.vue";
+export type { IconProps } from './Icon.vue';
