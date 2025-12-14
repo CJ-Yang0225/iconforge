@@ -3,12 +3,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "iconforge build && nuxt build",
+    "build": "pnpm exec iconforge build && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "icon:gen": "iconforge build"
+    "icon:gen": "pnpm exec iconforge build"
   },
   "dependencies": {
     "nuxt": "^4.2.2",
