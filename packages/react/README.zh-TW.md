@@ -39,6 +39,8 @@ interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   name: string;
   /** 圖示尺寸，可以是數字 (px) 或字串 */
   size?: number | string;
+  /** 無障礙標籤（供螢幕閱讀器使用） */
+  ariaLabel?: string;
 }
 ```
 
@@ -122,6 +124,7 @@ import { Icon } from '@/generated/icons/react';
 - 繼承所有 SVG 元素屬性
 - 提供型別安全的 `name` prop，有自動補全
 - 支援 `size` 為數字 (px) 或 CSS 值字串
+- 包含無障礙屬性 (`aria-hidden`, `focusable`, `ariaLabel`)
 
 ## 為什麼需要這個套件？
 

@@ -39,6 +39,8 @@ interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   name: string;
   /** Icon size, can be number (px) or string */
   size?: number | string;
+  /** Accessible label (for screen readers) */
+  ariaLabel?: string;
 }
 ```
 
@@ -122,6 +124,7 @@ The generated `Icon` component:
 - Extends all SVG element attributes
 - Provides type-safe `name` prop with autocomplete
 - Supports `size` as number (px) or CSS value string
+- Includes a11y attributes (`aria-hidden`, `focusable`, `ariaLabel`)
 
 ## Why This Package?
 

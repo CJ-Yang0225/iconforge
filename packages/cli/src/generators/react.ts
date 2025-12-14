@@ -40,23 +40,35 @@ ${icons
 `;
   await fs.writeFile(path.join(reactDir, "SvgSymbols.tsx"), symbolsContent);
 
-  // 3. Generate Icon.tsx (動態使用 viewBox)
-  // 注意：這裡保留 viewBox="0 0 24 24" 作為預設值，
-  // 因為 <use> 元素會繼承 symbol 的 viewBox
+  // 3. Generate Icon.tsx with a11y support
   const iconComponentContent = `import React from 'react';
 import { IconName } from './types';
 
 export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
+  /** Icon name (type-safe) */
   name: IconName;
+  /** Size in px (applies to both width and height) */
   size?: number | string;
+  /** Accessible label (for screen readers). When provided, aria-hidden will be false */
+  ariaLabel?: string;
 }
 
-export const Icon: React.FC<IconProps> = ({ name, size = 24, style, ...props }) => {
+export const Icon: React.FC<IconProps> = ({ 
+  name, 
+  size = 24, 
+  style, 
+  ariaLabel,
+  ...props 
+}) => {
   return (
     <svg
       width={size}
       height={size}
       style={{ display: 'inline-block', flexShrink: 0, ...style }}
+      aria-hidden={!ariaLabel}
+      aria-label={ariaLabel}
+      role={ariaLabel ? 'img' : undefined}
+      focusable="false"
       {...props}
     >
       <use href={\`#\${name}\`} />
