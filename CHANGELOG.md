@@ -2,16 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.2] - 2025-12-12
-
-### Fixed
-
-- **Core**: Prevent SVGO from removing default attributes (e.g., `fill="black"`) by adjusting `preset-default` options (`removeUnknownsAndDefaults: { defaultAttrs: false }`). This ensures that `fill="black"` is preserved and correctly converted to `currentColor`.
-
-### Changed
-
-- **React**: Bumped versions to 0.2.2 to ensure consistency across the monorepo.
-
 ## [0.3.0] - 2025-12-14
 
 ### Added
@@ -29,6 +19,16 @@ All notable changes to this project will be documented in this file.
 
 - **CLI**: Default output directory changed from `src/generated/icons` to `src/components/icons` to match common project structures.
 - **Docs**: Updated README files with Vue support and bilingual versions.
+
+## [0.2.2] - 2025-12-12
+
+### Fixed
+
+- **Core**: Prevent SVGO from removing default attributes (e.g., `fill="black"`) by adjusting `preset-default` options (`removeUnknownsAndDefaults: { defaultAttrs: false }`). This ensures that `fill="black"` is preserved and correctly converted to `currentColor`.
+
+### Changed
+
+- **React**: Bumped versions to 0.2.2 to ensure consistency across the monorepo.
 
 ## [0.2.1] - 2025-12-12
 
