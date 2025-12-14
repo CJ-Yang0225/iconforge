@@ -40,8 +40,10 @@ export default [
       "**/dist/**",
       "**/.next/**",
       "**/build/**",
-      "examples/react-next-app/src/components/icons/**",
-      "examples/react-next-app/src/generated/**",
+      "**/.output/**",
+      "**/.turbo/**",
+      "**/.nuxt/**",
+      "**/coverage/**",
     ],
   },
 ];

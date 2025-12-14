@@ -6,7 +6,7 @@
     "test": "vitest",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "pnpm -r exec tsc --noEmit",
+    "typecheck": "pnpm -r run typecheck",
     "clean": "pnpm -r exec rm -rf dist",
     "prepublish": "pnpm build && pnpm test && pnpm lint",
     "check-all": "pnpm install && pnpm build && pnpm test && pnpm lint"
