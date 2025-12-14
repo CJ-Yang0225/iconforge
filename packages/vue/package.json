@@ -1,7 +1,6 @@
 {
   "name": "@iconforge/vue",
   "version": "0.3.0",
-  "private": true,
   "description": "Vue runtime utilities for IconForge",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
